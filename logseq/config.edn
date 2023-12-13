@@ -292,7 +292,7 @@
  ;;  :journal?        false} ; Default value: false
 
  ;; Favorites to list on the left sidebar
- :favorites ["软件体系结构" "云计算"]
+ :favorites ["计网复习" "德语" "软件体系结构" "云计算"]
 
  ;; Set flashcards interval.
  ;; Expected value:

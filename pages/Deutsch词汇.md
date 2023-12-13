@@ -16,6 +16,7 @@
 					  |der Apfel,-:e|苹果|
 					  |die Banane,-n|香蕉|
 				- das Gemüse,- 蔬菜
+				  collapsed:: true
 					- |das Gemüse,-|蔬菜|
 					  |der Salat,-e|生菜|
 					  |der Chinakohl|白菜|
@@ -24,6 +25,7 @@
 					  |der Blumenkohl|菜花|
 					  |die Tomate,-n|西红柿|
 				- das Milchprodukt,-e 奶制品
+				  collapsed:: true
 					- |das Milchprodukt,-e|奶制品|
 					  |das Käse|奶酪|
 					  |der Kuchen,-|蛋糕|
@@ -72,10 +74,12 @@
 				  |der Stück|一块|
 		- ### 词组短语
 		- ### 常用句型
+		  collapsed:: true
 			- Was macht xxx? xxx在做什么？
 			- Heute ist Samstag. 今天是星期六
 			- Was isst/trinkst du (nicht) gern? 你不喜欢吃/喝什么?
 		- ### 其他词汇
+		  collapsed:: true
 			- selber 自己(口语)，selbst自己(书面)
 			- die Einheit,nur Sg 统一
 - # B1
