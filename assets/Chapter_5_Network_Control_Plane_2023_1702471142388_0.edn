@@ -358,4 +358,4 @@
                           :page 43},
                :content {:text "Db(c) = min{cb,a+Da(c), cb,c +Dc(c), c b,e +De(c)} = min{∞,1,∞} = 1"},
                :properties {:color "yellow"}}],
- :extra {:page 73}}
+ :extra {:page 106}}
