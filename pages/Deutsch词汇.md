@@ -16,7 +16,6 @@
 					  |der Apfel,-:e|苹果|
 					  |die Banane,-n|香蕉|
 				- das Gemüse,- 蔬菜
-				  collapsed:: true
 					- |das Gemüse,-|蔬菜|
 					  |der Salat,-e|生菜|
 					  |der Chinakohl|白菜|
