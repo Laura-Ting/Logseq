@@ -1,0 +1,28 @@
+file:: [ch05.4-IaaS-OpenStack-Nova_1702973748748_0.pdf](../assets/ch05.4-IaaS-OpenStack-Nova_1702973748748_0.pdf)
+file-path:: ../assets/ch05.4-IaaS-OpenStack-Nova_1702973748748_0.pdf
+
+- (PQ+pS,è'êëí'ì
+  ls-type:: annotation
+  hl-page:: 3
+  hl-color:: yellow
+  id:: 65815164-b626-444e-b8ba-834ea3b0eb11
+	- nova中的一个模块
+- (PQ+p,P(êë,*Pì
+  ls-type:: annotation
+  hl-page:: 3
+  hl-color:: yellow
+  id:: 658151c2-fc0b-49bf-8e8e-a57925d94a67
+	- 操作数据库
+- nova-conductor
+  ls-type:: annotation
+  hl-page:: 4
+  hl-color:: yellow
+  id:: 65815207-173d-49f9-9f8b-e0da67a38016
+	- 比如说内核，内存等信息
+	- ((6581522a-e548-4387-ae51-41316f7b81f2))
+	- 模块之间的交流全部通过消息队列
+- RabbitMQ
+  ls-type:: annotation
+  hl-page:: 4
+  hl-color:: yellow
+  id:: 6581522a-e548-4387-ae51-41316f7b81f2

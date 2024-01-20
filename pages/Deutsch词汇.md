@@ -3,11 +3,15 @@
 	-
 - # A1
 	- ## Einkaufen购物
+	  collapsed:: true
 		- ### 话题词汇
+		  collapsed:: true
 			- der Markt,-:e 市场
+			  collapsed:: true
 				- der Supermarkt,-:e 超市
 				- auf dem Supermarkt 在超市
 			- Lebensmittel pl. 食物
+			  collapsed:: true
 				- das Obst, nur Sg 水果
 					- |das Obst, nur Sg|水果|
 					  |die Wassermelone,-n|西瓜|
@@ -81,8 +85,16 @@
 		  collapsed:: true
 			- selber 自己(口语)，selbst自己(书面)
 			- die Einheit,nur Sg 统一
+- # A2
+	- ## L16 Sportarten
+		- die Sportart,-en 体育运动项目
+			- |体育项目|汉语|活动词组|运动员|
+			  |das Tennis, unz|Tennis spielen|die Tennisspielerin,-nen|
+			  ||||Federball 羽毛!
+			- Korbball 篮![]
 - # B1
 	- ## L8 Studium in Deutschland
+	  collapsed:: true
 		- ### 话题词汇
 		- ### 词组短语
 		- ### 常用句型

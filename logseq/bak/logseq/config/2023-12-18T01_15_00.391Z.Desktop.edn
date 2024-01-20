@@ -292,7 +292,7 @@
  ;;  :journal?        false} ; Default value: false
 
  ;; Favorites to list on the left sidebar
- :favorites ["大三上课程" "人工智能学习" "gre学习" "德语"]
+ :favorites ["人工智能学习" "gre学习" "德语" "云计算"]
 
  ;; Set flashcards interval.
  ;; Expected value:
