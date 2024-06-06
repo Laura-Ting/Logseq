@@ -1,0 +1,20 @@
+file:: [3.2_分布式数据库HBase_1715760379160_0.pdf](../assets/3.2_分布式数据库HBase_1715760379160_0.pdf)
+file-path:: ../assets/3.2_分布式数据库HBase_1715760379160_0.pdf
+
+- HDFS面向批量访问模式，不是随机访问模式
+  ls-type:: annotation
+  hl-page:: 10
+  hl-color:: yellow
+  id:: 66446f8a-4150-4808-a6f0-dff29ce3bae4
+- HBase是基于列存储的
+  ls-type:: annotation
+  hl-page:: 12
+  hl-color:: yellow
+  id:: 66447041-f00d-470f-8500-3992cb6cd99a
+	- 好求均值
+- HBase只有一个索引——行键
+  ls-type:: annotation
+  hl-page:: 13
+  hl-color:: yellow
+  id:: 6644707e-0b0d-4233-9036-cac4672b2202
+	- UK

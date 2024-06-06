@@ -293,7 +293,7 @@
  ;;  :journal?        false} ; Default value: false
 
  ;; Favorites to list on the left sidebar
- :favorites ["人工智能学习" "深度学习" "大三下课程" "算法刷题"]
+ :favorites ["三维重建" "人工智能学习" "深度学习" "大三下课程" "算法刷题"]
 
  ;; Set flashcards interval.
  ;; Expected value:
