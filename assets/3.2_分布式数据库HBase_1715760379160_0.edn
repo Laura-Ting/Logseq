@@ -73,4 +73,4 @@
                           :page 13},
                :content {:text "HBase只有一个索引——行键"},
                :properties {:color "yellow"}}],
- :extra {:page 14}}
+ :extra {:page 62}}

@@ -16,3 +16,8 @@ file-path:: ../assets/3.5-Spark_1716799066384_0.pdf
   hl-page:: 30
   hl-color:: red
   id:: 6654520b-e0a4-43ef-96da-60b6209dd274
+- SparkContext
+  ls-type:: annotation
+  hl-page:: 26
+  hl-color:: red
+  id:: 66712927-6571-4428-8f14-9f976bfd100b

@@ -297,7 +297,7 @@
 	- 任务规划或决策层
 - SLAM在做的事
   collapsed:: true
-	- ![Replaced by Image Uploader](https://raw.githubusercontent.com/qugushihua/blog-images/master/202403101913845.png)
+	- ![Replaced by Image Uploader](https://raw.githubusercontent.com/qugushihua/blog-images/master/202403101913845.png){:height 222, :width 399}
 	- IMU一般用于做自身估计，包括三个，角速度计，加速度计，磁场计
 - SLAM的提出与发展
   collapsed:: true
@@ -340,7 +340,6 @@
 	- 数学表示
 	  collapsed:: true
 		- 给定
-		  collapsed:: true
 			- 机器人的控制量Uk
 			- 对于环境特征的观测Zk
 		- 估计
@@ -350,11 +349,10 @@
 		- bel置信概率
 		  collapsed:: true
 			- ![Replaced by Image Uploader](https://raw.githubusercontent.com/qugushihua/blog-images/master/202403102021271.png){:height 315, :width 514}
-			- ![Replaced by Image Uploader](https://raw.githubusercontent.com/qugushihua/blog-images/master/202403102021807.png)
+			- ![Replaced by Image Uploader](https://raw.githubusercontent.com/qugushihua/blog-images/master/202403102021807.png){:height 337, :width 532}
 			-
 			-
 	- 缺点
-	  collapsed:: true
 		- 需要依赖于状态量xk和xk+1，还要依赖于特征，特征需要有很多，时效和存储
 - 图优化 #
   collapsed:: true
@@ -373,7 +371,6 @@
 - SLAM知识架构
   collapsed:: true
 	- 整体架构
-	  collapsed:: true
 		- ![Replaced by Image Uploader](https://raw.githubusercontent.com/qugushihua/blog-images/master/202403102038017.png)
 	- 传感器
 	  collapsed:: true
@@ -534,7 +531,7 @@
 		- 一般来说，是旋转需要进行单位化
 -
 - KItti：数据集
-- mpu6090，
+- mpu6090
 - https://github.com/EricLYang
 - https://zhuanlan.zhihu.com/p/649761612
 - https://zhuanlan.zhihu.com/p/39628699

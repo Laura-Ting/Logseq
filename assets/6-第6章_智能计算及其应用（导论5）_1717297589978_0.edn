@@ -31,5 +31,22 @@
                                    :height 569.25}),
                           :page 3},
                :content {:text "群智能"},
+               :properties {:color "red"}}
+              {:id #uuid "66626247-30d3-4a1a-bc4c-64295eb2d03a",
+               :page 7,
+               :position {:bounding {:x1 297.1900329589844,
+                                     :y1 192.65000915527344,
+                                     :x2 503.6405944824219,
+                                     :y2 225.45001220703125,
+                                     :width 640,
+                                     :height 480},
+                          :rects ({:x1 297.1900329589844,
+                                   :y1 192.65000915527344,
+                                   :x2 503.6405944824219,
+                                   :y2 225.45001220703125,
+                                   :width 640,
+                                   :height 480}),
+                          :page 7},
+               :content {:text "选择、重组和变异"},
                :properties {:color "red"}}],
- :extra {:page 52}}
+ :extra {:page 31}}

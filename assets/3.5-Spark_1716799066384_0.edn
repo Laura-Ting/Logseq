@@ -48,5 +48,22 @@
                                    :height 571.5}),
                           :page 30},
                :content {:text "只读"},
+               :properties {:color "red"}}
+              {:id #uuid "66712927-6571-4428-8f14-9f976bfd100b",
+               :page 26,
+               :position {:bounding {:x1 406.5625183098018,
+                                     :y1 155.83749389648438,
+                                     :x2 499.8617126457393,
+                                     :y2 178.23748779296875,
+                                     :width 677.9999999999999,
+                                     :height 508.49999999999994},
+                          :rects ({:x1 406.5625183098018,
+                                   :y1 155.83749389648438,
+                                   :x2 499.8617126457393,
+                                   :y2 178.23748779296875,
+                                   :width 677.9999999999999,
+                                   :height 508.49999999999994}),
+                          :page 26},
+               :content {:text "SparkContext"},
                :properties {:color "red"}}],
- :extra {:page 38}}
+ :extra {:page 28}}
