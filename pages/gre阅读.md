@@ -1,7 +1,5 @@
 ### gre阅读概况
-collapsed:: true
 	- 篇目分类
-	  collapsed:: true
 		- 短篇阅读（重中之重，题目最多，得分多）
 		  collapsed:: true
 			- 160字
@@ -22,12 +20,10 @@ collapsed:: true
 			- 每篇用时8min
 		- 注意：以题型为导向，优先级
 	- 如何高效提分
-	  collapsed:: true
 		- 以题型为导向 -> 死背公式
 		- 高频反复考 -> 分析高频 300机经
 		- 遗忘速度快 -> 反复复习
 	- 做题步骤
-	  collapsed:: true
 		- 建议先读题后读文章
 - ### 题型
 	- 主旨题
@@ -90,6 +86,7 @@ collapsed:: true
 					-
 					-
 	- 主旨题三兄弟——宏观题需要读全文
+	  collapsed:: true
 		- 主旨目的题or主旨内容题
 		  collapsed:: true
 			- 主旨目的题：作者目的，文章结构，三个主旨错误
@@ -105,6 +102,7 @@ collapsed:: true
 		- 微观：primarily to给定动词，只关注这个句子，给定动词可以帮助判断
 	- 阅读词汇题=填空单空题
 	- 逻辑单题
+	  collapsed:: true
 		- 先读题干，判断题型
 		- 不论哪种都需要阅读全文，找三要素
 		  collapsed:: true
@@ -127,18 +125,14 @@ collapsed:: true
 		- 现象解释：为这个现象提出一堆解释
 		- 问题解决：为这个问题提出一堆解决方案
 		- 新旧观点：2个对立观点
-		  collapsed:: true
 			- 被反驳的观点是旧观点，用来去反驳的观点是新观点
 		- 观点点评：只有1个观点
-		  collapsed:: true
 			- 粉丝型：从头到尾在支持，拥护，论证
 			- 键盘侠，杠精：只是为了反驳，但提不出他的看法和解决方案
 		- 说明文
-		  collapsed:: true
 			- 前面的都是议论文：有观点的文章
 			- 客观介绍，特征是时间维度，出现频率低
 		- 练习
-		  collapsed:: true
 			- eg1
 			  collapsed:: true
 				- ![Replaced by Image Uploader](https://raw.githubusercontent.com/qugushihua/blog-images/master/202312181457363.png)

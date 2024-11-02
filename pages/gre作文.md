@@ -1,8 +1,6 @@
 ## Issue
 	- ### 4分要求
-	  collapsed:: true
 		- 不走题
-		  collapsed:: true
 			- 不能用小范围来回答大范围
 			  collapsed:: true
 				- eg：包子铺这么样？包子不错。但是范围不全
@@ -10,14 +8,13 @@
 			  collapsed:: true
 				- eg：政府要求学生做xx，对学生有好处1，有好处2... 但是要考虑这是不是政府的责任？
 		- 有拆分
-		  collapsed:: true
 			- 一定要写中心句
 		- 有论述
-		  collapsed:: true
 			- 写在中心句后面，对中心句解释说明
 		- 有例子和分析
 	- ### 快速生成合理逻辑
 		- N应该对M做某事：是N的责任吗，对M有什么影响，能做得到吗？
+		  collapsed:: true
 			- 思路：
 			  collapsed:: true
 				- N的定义：一般是人才那一堆
@@ -73,6 +70,7 @@
 					- 学生比较忙，做不到
 					- 这件事可以变成optional而不是compulsory的，鼓励学生进行跨专业选课，但不要强迫要求学生
 		- N对M有影响：对M1，M2分别有什么影响（对M进行领域拆分）
+		  collapsed:: true
 			- 两种拆分方式：
 			  collapsed:: true
 				- 按照内容领域
@@ -233,6 +231,7 @@
 						- 如果有人说科技限制了人们的交流，那是因为他们的使用方式不对：如果人们依赖科技玩游戏，并沉迷其中、那势必会影响人们的交流，所以为了是科技的影响最优，人们需要注意对科技的使用
 						- 人的问题，自制力不够，人使用不当，可以被规避
 		- N是M：N1=M，N2=M（N一定是名词）
+		  collapsed:: true
 			- eg1：Many important discoveries or creations （N）are accidental（M）: it is usually while seeking the answer to one question that we come across the answer to another.
 			  collapsed:: true
 				- 政治领域：很少，所有的policy都是为了解决这个问题
@@ -241,6 +240,7 @@
 					- Fleming，青霉素的发现，培养 皿，回来之后发现有的坏了有的没坏（我们会怎么做，直接扔掉），和楼下的微生物学家一起研究，发现没坏的是因为青霉素，如果没有后续实验就不会发现青霉素。所以偶然事件不是决定性因素，没有accident迟早也会发现，科学家们的sensitivity，professional knowledge，commitment to science 是更重要的
 					- 假设牛顿被苹果砸了，提出牛顿定律（被苹果砸的人有很多，别人被砸了怎么没做研究），是因为他有science sensitivity，如果没有他后续的一系列求证过程否则怎么会有万有引力定律。我承认一些发明创造中有偶然因素，但是光靠偶然是不够的，重点还是他们本身的努力，他们的科学研究，他们的知识积累。即使有偶然现象，也不能认为这个偶然现象本身就是偶然的
 		- N应该做某事：做某事的影响（以结果论英雄）
+		  collapsed:: true
 			- 思路：
 			  collapsed:: true
 				- 考虑影响：对Doer，对Society
@@ -301,6 +301,7 @@
 				- 过度质疑不好：
 					- 过度的质疑会导致老师或其他人的教学权威收到影响，过度的质疑也会干扰到正常的讲授过程
 		- N>M：N拆成N1+N2，M拆成M1+M2，证明N1>M1，N2>M2
+		  collapsed:: true
 			- 要在同样一个领域比较N和M的大小
 			- eg1：In any field of inquiry, the beginner(N) is more likely than the expert(M) to make important contributions
 				- 同意
@@ -403,6 +404,7 @@
 		- issue核心段字数130-150，长了必须要删
 		- 写作格式：每段顶格写，段和段之间空一行
 - ## Topic
+  collapsed:: true
 	- 政府（5）
 		- 1，资助科研
 			- Governments should place few, if any, restrictions on scientific research and development.
@@ -2150,6 +2152,7 @@
 					- 学科内部的专业知识足以推动进步：某些学科可能具有自身完备的理论框架和方法论，可以在内部不断发展和创新，而不需要过多地依赖其他学科的知识和经验。eg数学作为一门基础学科，拥有自己独特的理论框架和方法论。数学家们通过纯粹的数学推理和证明，可以推动数学学科的发展。数学的发展往往是基于内部的逻辑和推理，通过发现新的数学定理、建立新的数学模型和解决数学难题来推动进步。尽管数学可以应用于其他学科和领域，但在数学内部，它可以自主地发展和创新。
 					- 同时还和国家的政策，这个领域的发展密切相关
 	- 劝说他人
+	  collapsed:: true
 		- 69，检验论点 P60
 		  collapsed:: true
 			- The best test of an argument is the argument's ability to convince someone with an opposing viewpoint.

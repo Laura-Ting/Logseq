@@ -187,6 +187,7 @@ collapsed:: true
 				- 但此处不受取反逻辑约束，此处联动取同
 				- ![Replaced by Image Uploader](https://raw.githubusercontent.com/qugushihua/blog-images/master/202401062111229.png)
 	- #### 解释说明
+	  collapsed:: true
 		- 定义
 		  collapsed:: true
 			- 某个对象特征，由一个修饰的成分或补充说明的内容来描述
