@@ -253,23 +253,23 @@ a.tag {
 
 /* titles */
 
-h1,
+/* h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
   font-family: 'Onest', sans-serif;
-}
+} */
 
-.ls-block h1 {
+/* .ls-block h1 {
   font-size: 1.8em !important;
   font-weight: bold;
   margin: 20px 0px;
-}
+} */
 
 /* 修复typo错误 */
-.ls-block h2 {
+/* .ls-block h2 {
   font-size: 1.4em !important;
   font-weight: bold;
 }
@@ -292,7 +292,7 @@ h6 {
 .ls-block h6 {
   font-size: 1em;
   font-weight: bold;
-}
+} */
 
 /* h1.title {
   font-family: 'Onest', sans-serif;
@@ -303,7 +303,7 @@ h6 {
 
 /* Internal Page reference color */
 
-:root {
+/* :root {
   --ls-font-family: 'Onest', sans-serif;
   --ls-font-weight: 300;
 }
@@ -311,9 +311,9 @@ html,
 body {
   font-family: 'Onest', sans-serif;
   font-weight: 300;
-}
+} */
 
-.page-properties a {
+/* .page-properties a {
   font-weight: 500;
   color: #2a2b2c !important;
 }
@@ -347,11 +347,11 @@ span.page-reference a {
 .custom-query a {
   font-weight: 300 !important;
   font-family: 'Roboto', sans-serif;
-}
+} */
 
 /* Table styling  courtesy of  mia theme https://github.com/playerofgames/logseq-mia-theme/blob/master/mia_base.css */
 
-.table-wrapper > table {
+/* .table-wrapper > table {
   table-layout: fixed;
   width: 100%;
   border-top: 1px var(--table-border-color) solid;
@@ -435,7 +435,7 @@ span.inline.done {
 .ls-page-title > h1.title,
 .journal-title > h1 {
   margin-bottom: 0px;
-}
+} */
 
 /* Selection lists (search, tag complete, etc.) */
 
