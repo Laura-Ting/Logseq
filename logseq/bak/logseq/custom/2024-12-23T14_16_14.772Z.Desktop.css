@@ -15,11 +15,7 @@ html[data-theme='light'] {
 
   --ls-header-background-color: #f8f8f8;
 
-  --ls-page-ref-text-color: rgb(
-    63,
-    62,
-    62
-  ); /* 修复影响黑暗模式块链接显示的问题 */
+  --ls-page-ref-text-color: #1B88BF; /* 修复影响黑暗模式块链接显示的问题 */
 }
 
 .dark-theme,
@@ -263,7 +259,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Onest', sans-serif;
+  font-family: 'sans-serifOnest', sans-serif;
 }
 
 .ls-block h1 {
@@ -298,12 +294,12 @@ h6 {
   font-weight: bold;
 }
 
-h1.title {
+/* h1.title {
   font-family: 'Onest', sans-serif;
   font-size: 50px;
   font-weight: 700;
   line-height: 60px;
-}
+} */
 
 /* Internal Page reference color */
 
@@ -495,4 +491,4 @@ a[data-ref='card'] {
 /* 左侧的收藏页面那一行上滑时会出现文字重叠现象 */
 .left-sidebar-inner .nav-content-item .header {
   background-color: var(--ls-header-background-color);
-} */
+}

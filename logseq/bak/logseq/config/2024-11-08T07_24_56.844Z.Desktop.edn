@@ -117,7 +117,8 @@
  ;; Regardless of whether individual pages have been marked as public.
  ;; Default value: false
  ;; :publishing/all-pages-public? false
-
+:publishing/all-pages-public? true
+:default-home {:page "README" :sidebar ["contents"]}
  ;; Define the default home page and sidebar status.
  ;; If unspecified, the journal page will be loaded on startup and the right sidebar will stay hidden.
  ;; The `:page` value represents the name of the page displayed at startup.
@@ -292,7 +293,7 @@
  ;;  :journal?        false} ; Default value: false
 
  ;; Favorites to list on the left sidebar
- :favorites ["算法刷题" "大三上课程" "人工智能学习" "gre学习" "德语"]
+ :favorites ["三维重建" "人工智能学习" "深度学习" "大三下课程" "算法刷题"]
 
  ;; Set flashcards interval.
  ;; Expected value:
@@ -411,4 +412,5 @@
  ;;   - :triple-lowbar (default)
  ;;      ;use triple underscore `___` for slash `/` in page title
  ;;      ;use Percent-encoding for other invalid characters
- :file/name-format :triple-lowbar}
+ :file/name-format :triple-lowbar
+ :ui/show-brackets? false}

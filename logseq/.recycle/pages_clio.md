@@ -1,0 +1,18 @@
+- 按照论文逻辑
+- 1)Open-Set Object Clustering Evaluation
+	- metrics
+		- osR(open-set Recall): query n个物体，n是task相关的gt物体的个数
+		- osP(open-set Precision)：检测正确的次数/总检测数(取大于90%cos sim的检测)
+		- strict: estimate的bbox包含gt质心 && gt的bbox包含estimate的质心
+		- relaxed：estimate的bbox包含gt质心 || gt的bbox包含estimate的质心
+		- 最差情况：relaxed情况下estimate的bbox无限大，strict情况下即使gt和estimate有很大重叠也不算数
+		- strict和relaxed都会报告
+		- F1：osR 和osP的调和平均
+		- top n最相关estimate物体的平均IOU
+		- estimated obj的总数
+		- 平均运行时间tpf
+	- Compared Techniques
+		- ConceptGraphs用CLIP代替LLava+GPT
+		- Khronos和ConceptGraph和Clio
+		- Clio-Prim
+		-

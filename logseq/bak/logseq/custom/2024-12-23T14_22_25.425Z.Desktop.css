@@ -347,11 +347,11 @@ span.page-reference a {
 .custom-query a {
   font-weight: 300 !important;
   font-family: 'Roboto', sans-serif;
-} */
+}
 
 /* Table styling  courtesy of  mia theme https://github.com/playerofgames/logseq-mia-theme/blob/master/mia_base.css */
 
-/* .table-wrapper > table {
+.table-wrapper > table {
   table-layout: fixed;
   width: 100%;
   border-top: 1px var(--table-border-color) solid;
@@ -435,7 +435,7 @@ span.inline.done {
 .ls-page-title > h1.title,
 .journal-title > h1 {
   margin-bottom: 0px;
-} */
+}
 
 /* Selection lists (search, tag complete, etc.) */
 
@@ -491,4 +491,4 @@ a[data-ref='card'] {
 /* 左侧的收藏页面那一行上滑时会出现文字重叠现象 */
 .left-sidebar-inner .nav-content-item .header {
   background-color: var(--ls-header-background-color);
-}
+} */
