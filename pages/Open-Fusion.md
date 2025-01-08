@@ -1,0 +1,25 @@
+- real-time, open-vocabulary 3D mapping, queryable
+- use VLM and TSDF->region-based embeddings, associated confidence maps
+- A. Real-time Semantic TSDF 3D Scene Reconstruction
+	- 1) Feature Extraction->confidence maps, embedding maps
+		- use SEEM model θ to extract ***region-level*** aligned features
+		- Ct, Et = θ(It). region confidence map: Ct ∈ R^|Q|×H/4×W/4, semantic embedding: Et ∈ R^|Q|×d
+		- skip frames according to overlap, skip tasks not require processing semantics
+	- 2) Real-time Semantic 3D Scene Reconstruction: frame t integrate STDF Vt-1, update embedding dictionary Dt
+		- Observations: It(rgb), Dt(depth), At(pose)
+		- Map TSDF Vt: a set of M volumetric blocks, ![Replaced by Image Uploader](https://raw.githubusercontent.com/Laura-Ting/blog-images/master/202501082118185.png){:height 37, :width 103}
+		- globally sparse but locally dense, each block contains r * r * r voxel grid, ![Replaced by Image Uploader](https://raw.githubusercontent.com/Laura-Ting/blog-images/master/202501082131577.png){:height 36, :width 103}, each pj contains ![Replaced by Image Uploader](https://raw.githubusercontent.com/Laura-Ting/blog-images/master/202501082132777.png){:height 32, :width 235}, color, weights for TSDF update, TSDF value ϕ, embedding keys k, confidence score c
+		- ①Feature Rendering by TSDF: render a confidence map C˜t and an embedding E˜t from Vt-1
+			- project the depth
+			- identify the active blocks, in current viewing frustum
+			- project the semantic Vt-1 in active blocks
+		- ②Region-based Semantic Feature Matching: establish correspondences between Et and E˜t
+			- matching pairs between Ct and C˜t, 2D rectangular assignment problem,  a modified Jonker-Volgenant algorithm,  soft-IoU<0.10 is discarded
+			- ![Replaced by Image Uploader](https://raw.githubusercontent.com/Laura-Ting/blog-images/master/202501082215484.png){:height 68, :width 366}
+		- ③Feature Update: update map Vt−1 at time t -> Vt, update the embedding dictionary (Dt)
+			- each voxel pj in the active blocks undergoes the standard TSDF integration process, use weighted average to update RGBj and TSDF values
+			  ϕj ![Replaced by Image Uploader](https://raw.githubusercontent.com/Laura-Ting/blog-images/master/202501082209292.png){:height 59, :width 228} ![Replaced by Image Uploader](https://raw.githubusercontent.com/Laura-Ting/blog-images/master/202501082209893.png){:height 79, :width 287} ![Replaced by Image Uploader](https://raw.githubusercontent.com/Laura-Ting/blog-images/master/202501082209312.png){:height 33, :width 123}
+			- update  dictionary D and the confidence score cj and the associated key kj using S*
+- B. Open-Vocab Query and Scene Understanding
+	- calculate cos sim
+	- query vector q ∈ Rd is obtained using a modality specific encoder trained in a shared embedding space with the semantic vectors E

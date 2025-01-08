@@ -1,0 +1,20 @@
+- Skinned Multi-Person Linear
+- a learned model of human body and shape, a skinned vertex based model
+- Motivation & Goal
+	- different shapes, pose deformations, including soft-tissue motion
+	- render fast, deploy easily, compatible
+- Current Method's Limitation
+	- traditional: hand rigging, artists sculptured->manual efforts
+	- learning statistics: scans are not compatible with graphic softwares
+- LBS's issue & Solution
+	- issue: “taffy” and “bowtie” effects
+	- others solution: skinning methods / learn from data / triangle deformations(realistic)
+	- ours solution: additively combined with a rest template with different blend shapes for identity, pose, and soft-tissue dynamics
+- parameters
+	- rest pose template
+	- blend weights
+	- pose-dependent blend shapes
+		- a linear function of the elements of the pose rotation matrices
+		- because elements of rotation matrices and resulting deformations are bounded,  model better generalize
+	- identity-dependent blend shapes
+	- a regressor from vertices to joints locations
