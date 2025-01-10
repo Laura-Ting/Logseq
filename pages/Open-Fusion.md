@@ -1,6 +1,6 @@
 - real-time, open-vocabulary 3D mapping, queryable
 - use VLM and TSDF->region-based embeddings, associated confidence maps
-- A. Real-time Semantic TSDF 3D Scene Reconstruction
+- #### A. Real-time Semantic TSDF 3D Scene Reconstruction
 	- 1) Feature Extraction->confidence maps, embedding maps
 		- use SEEM model θ to extract ***region-level*** aligned features
 		- Ct, Et = θ(It). region confidence map: Ct ∈ R^|Q|×H/4×W/4, semantic embedding: Et ∈ R^|Q|×d
@@ -20,6 +20,6 @@
 			- each voxel pj in the active blocks undergoes the standard TSDF integration process, use weighted average to update RGBj and TSDF values
 			  ϕj ![Replaced by Image Uploader](https://raw.githubusercontent.com/Laura-Ting/blog-images/master/202501082209292.png){:height 59, :width 228} ![Replaced by Image Uploader](https://raw.githubusercontent.com/Laura-Ting/blog-images/master/202501082209893.png){:height 79, :width 287} ![Replaced by Image Uploader](https://raw.githubusercontent.com/Laura-Ting/blog-images/master/202501082209312.png){:height 33, :width 123}
 			- update  dictionary D and the confidence score cj and the associated key kj using S*
-- B. Open-Vocab Query and Scene Understanding
+- #### B. Open-Vocab Query and Scene Understanding
 	- calculate cos sim
 	- query vector q ∈ Rd is obtained using a modality specific encoder trained in a shared embedding space with the semantic vectors E

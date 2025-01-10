@@ -293,7 +293,7 @@
  ;;  :journal?        false} ; Default value: false
 
  ;; Favorites to list on the left sidebar
- :favorites ["IDEA" "Bug Recorder" "三维重建" "人工智能学习" "深度学习" "算法刷题"]
+ :favorites ["read paper" "research analysis" "Read-Paper" "IDEA" "Bug Recorder"]
 
  ;; Set flashcards interval.
  ;; Expected value:
