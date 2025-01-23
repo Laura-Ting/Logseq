@@ -15,11 +15,7 @@ html[data-theme='light'] {
 
   --ls-header-background-color: #f8f8f8;
 
-  --ls-page-ref-text-color: rgb(
-    63,
-    62,
-    62
-  ); /* 修复影响黑暗模式块链接显示的问题 */
+  --ls-page-ref-text-color: #1B88BF; /* 修复影响黑暗模式块链接显示的问题 */
 }
 
 .dark-theme,
@@ -257,23 +253,23 @@ a.tag {
 
 /* titles */
 
-h1,
+/* h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
   font-family: 'Onest', sans-serif;
-}
+} */
 
-.ls-block h1 {
+/* .ls-block h1 {
   font-size: 1.8em !important;
   font-weight: bold;
   margin: 20px 0px;
-}
+} */
 
 /* 修复typo错误 */
-.ls-block h2 {
+/* .ls-block h2 {
   font-size: 1.4em !important;
   font-weight: bold;
 }
@@ -296,18 +292,18 @@ h6 {
 .ls-block h6 {
   font-size: 1em;
   font-weight: bold;
-}
+} */
 
-h1.title {
+/* h1.title {
   font-family: 'Onest', sans-serif;
   font-size: 50px;
   font-weight: 700;
   line-height: 60px;
-}
+} */
 
 /* Internal Page reference color */
 
-:root {
+/* :root {
   --ls-font-family: 'Onest', sans-serif;
   --ls-font-weight: 300;
 }
@@ -315,9 +311,9 @@ html,
 body {
   font-family: 'Onest', sans-serif;
   font-weight: 300;
-}
+} */
 
-.page-properties a {
+/* .page-properties a {
   font-weight: 500;
   color: #2a2b2c !important;
 }
@@ -351,11 +347,11 @@ span.page-reference a {
 .custom-query a {
   font-weight: 300 !important;
   font-family: 'Roboto', sans-serif;
-}
+} */
 
 /* Table styling  courtesy of  mia theme https://github.com/playerofgames/logseq-mia-theme/blob/master/mia_base.css */
 
-.table-wrapper > table {
+/* .table-wrapper > table {
   table-layout: fixed;
   width: 100%;
   border-top: 1px var(--table-border-color) solid;
@@ -439,7 +435,7 @@ span.inline.done {
 .ls-page-title > h1.title,
 .journal-title > h1 {
   margin-bottom: 0px;
-}
+} */
 
 /* Selection lists (search, tag complete, etc.) */
 
@@ -495,4 +491,41 @@ a[data-ref='card'] {
 /* 左侧的收藏页面那一行上滑时会出现文字重叠现象 */
 .left-sidebar-inner .nav-content-item .header {
   background-color: var(--ls-header-background-color);
-} */
+}
+
+
+span[data-ref="#red"],
+span[data-ref="#green"],
+span[data-ref="#blue"],
+span[data-ref="#redf"],
+span[data-ref="#greef"],
+span[data-ref="#bluef"] {
+  display: none;
+}
+span[data-ref="#red"] + mark {
+  background: #ffc7c7;
+}
+span[data-ref="#green"] + mark {
+  background: #ccffc1;
+}
+span[data-ref="#blue"] + mark {
+  background: #abdfff;
+}
+span[data-ref="#redf"] + mark {
+  color: #ffc7c7;
+  background: none;
+  padding: 0;
+  border-radius: 0;
+}
+span[data-ref="#greef"] + mark {
+  color: #03b803;
+  background: none;
+  padding: 0;
+  border-radius: 0;
+}
+span[data-ref="#bluef"] + mark {
+  color: #41a5ee;
+  background: none;
+  padding: 0;
+  border-radius: 0;
+}

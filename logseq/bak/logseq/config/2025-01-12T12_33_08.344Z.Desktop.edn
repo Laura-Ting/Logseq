@@ -293,7 +293,7 @@
  ;;  :journal?        false} ; Default value: false
 
  ;; Favorites to list on the left sidebar
- :favorites ["research analysis" "Read-Paper" "IDEA" "Bug Recorder"]
+ :favorites ["timelin" "timeline" "TIMELINE" "read paper" "research analysis" "Read-Paper" "IDEA" "Bug Recorder"]
 
  ;; Set flashcards interval.
  ;; Expected value:

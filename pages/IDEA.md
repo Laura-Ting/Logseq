@@ -6,3 +6,17 @@
 - hovsg的抽帧问题，导致有些东西只看到一眼。能否选择好的视角，根据画面中物体的不确定性去决定我是否多看这个物体，以及怎么在现有观测中选择角度（离线setting），在线的话是主动问题
 -
 - 可以参照concept-fusion方法看近处物体和看远处物体需要有不同的权重。
+-
+- From 学长
+- Dynamic Scene Graph
+- 仿真器中物体解耦，仿真器中实时数字化世界模型更新
+- 动态场景中人的重建，关节重映射，具身来模仿学习
+-
+-
+- 在hovsg基础上改
+	- 动态选择关键帧
+	- 把yoloworld和ours的weighting，filtering接进去
+-
+- GiftedNav中的**residual network**，是否从什么层抽出来会更好，不同的层的特征都有什么样的特性
+-
+- 直接用3D segmentation，而非2D是否能够保持语义完整性
