@@ -512,19 +512,19 @@ span[data-ref="#blue"] + mark {
   background: #abdfff;
 }
 span[data-ref="#redf"] + mark {
-  color: #ffc7c7;
+  color: #d35230;
   background: none;
   padding: 0;
   border-radius: 0;
 }
 span[data-ref="#greef"] + mark {
-  color: #ccffc1;
+  color: #03b803;
   background: none;
   padding: 0;
   border-radius: 0;
 }
 span[data-ref="#bluef"] + mark {
-  color: #abdfff;
+  color: #41a5ee;
   background: none;
   padding: 0;
   border-radius: 0;
