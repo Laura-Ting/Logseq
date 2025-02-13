@@ -1,0 +1,11 @@
+- pure Visual Model
+	- SAM: Segment anything. 2023 ICCV 在zero-shot transfer方面优秀, 生成多尺度分割mask
+	- DNIO: Emerging properties in self-supervised vision transformers. 2021 ICCV
+	- DINOv2 DINO和DINOv2以一种自监督的形式训练，提供更细粒度的feature
+- VML
+	- CLIP: Learning transferable visual models from natural language supervision. 2021 ICML 用对比学习去对齐视觉和文本特征
+	- Lseg: Language-driven semantic segmentation. 2022 ICLR 结合空间正则化来增强预测精度
+	- Lerf: Language embedded radiance fields. 2023 ICCV 从CLIP中distill特征到NeRF，在优化language field的同时优化NeRF，使用位置和物理尺度来生成 CLIP 向量
+	- Weakly supervised 3d openvocabulary segmentation. 2023 NIPS 用NeRF实现3D开集分割
+	- APE: Aligning and prompting everything all at once for universal visual perception. 2024 CVPR 作为适用于多种多模态任务的通用感知模型
+	-

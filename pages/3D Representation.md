@@ -1,0 +1,11 @@
+- Point Cloud
+- Voxel
+- Mesh
+- NeRF
+	- Enhanced NeRF
+		- Mip-nerf: A multiscale representation for anti-aliasing neural radiance fields. 2021 ICCV
+		- Instant-NGP 使用hash encoding加速NeRF
+		- Mip-NeRF解决aliasing issues
+- Gaussian
+	- Enhanced Gaussian
+		- Mip-Splatting解决aliasing issues

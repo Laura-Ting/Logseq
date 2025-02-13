@@ -1,0 +1,4 @@
+- NeRF
+	- DS-NeRF: Depth-supervised nerf: Fewer views and faster training for free. 2022 CVPR
+- Gaussian
+	- DG-Splatting

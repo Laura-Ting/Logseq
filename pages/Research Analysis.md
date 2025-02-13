@@ -1,4 +1,5 @@
 - GiftedNav corner case -- my writing
+  collapsed:: true
 	- v0
 	  collapsed:: true
 		- 在三维重建中，遮挡和局部观测是从二维观察三维时天然存在的问题。多个视角的观测能够帮助我们更好地确定物体的语义。目前一个流行的解决范式是通过分割模型得到每一帧类别无关的分割区域再用Foundation Model获取对应区域的特征，再将帧间特征进行融合。但是这种方法论存在问题，依赖于分割结果的粒度和获取到的特征的准确性。
@@ -48,6 +49,7 @@
 	- 多视角不一致性
 -
 - GiftedNav当前文章结构
+  collapsed:: true
 	- Intro
 		- focus在构建queryable地图上，但是问题是closed-set
 		- open-vocabulary进展，dense-feature field-based(基于backprojection，differentiable rendering)和scene graph-based(在内存中保留所有点云)
@@ -88,4 +90,129 @@
 	- 在三维语义建图任务中，空间上邻近的点通常具有语义相关性（例如，属于同一个物体或区域），按顺序存储可以简化聚合操作。
 	- 按顺序存储可以减少GPU在处理共享存储时的随机访问开销，提高数据访问的带宽利用率。
 -
+- Gaussian+Scene Graph
+- 问题：一个高斯可能代表多个object，所以需要更明确的边界，而且每个object都有自己的表面->需要基于现成codebase
+- 总共有T时刻，即总共T帧，每一帧有M个mask
+- 二维是否需要具体到每一个像素：如果使用存储id，而且feature本身是local-global的，那么就不需要每个像素上的feature。如果使用
+- scene graph优化
+	- 每个高斯
+- Projection路线:
+	- 每个高斯上存id
+		- 记录帧ID，maskID，就能通过这两个信息找到feature。比如说一个数据库存储。
+		- 高斯表征：xyz，rgb，o，r，帧id+maskid
+		- 因为是sequential的，有深度的就代表是之前已经被splat上去的。先不根据opacity，而是直接t时刻所有的点去t-1时刻地图中找最近邻，如果找到了最近邻切。。
+		- 优势：特征不是存储在高斯上，节省显存
+		- 缺点：无法直接优化特征，特征的语义信息无法作用于高斯属性的调整(比如透明度，颜色)
+	- 每个高斯上存特征
+		- 高维特征
+		- 低维特征：PCA或自编码器
 -
+- Render路线：
+	- 比如说现在是时刻t
+	- 存储ID方式：
+		- 数据库存储两个dict：
+			- 1，2D语义信息用于优化过程指导。key：帧ID+maskID，value：高维feature(比如说通过SEEM得到)
+			- 2，高斯语义信息。key：semantic gaussian ID，value：高维feature(每新来一个时刻都进行更新)
+			- confidence
+		- 高斯表征：xyz，rgb，o，r，帧id+maskid，semantic gaussian ID
+		- 已有数据：
+			- t-1时刻高斯地图
+			- t时刻gt rgb，depth，pseudo semantic(以mask为划分单位)
+			- t-1时刻地图的高斯按照时刻t下的pose做渲染得到render rgb, render depth，render opacity。
+			- 根据rasterization信息找到渲染的每个pixel对应的多个高斯，获取每个高斯的帧ID和maskID，得到当前2D这个pixel下对应的多个高维特征，进行特征加权平均(根据距离和opacity)，得到估计的t时刻下的语义图。
+			- 这个语义和每个高斯对应存到数据库中，可以通过每个高斯有一个semantic gaussian ID找到，这个feature是每个时刻都进行更新的。和t时刻pseudo semantic求loss。如何进行feature的优化？这样和直接是否真正减少了存储高斯的显存（动态加载？）。
+			- 根据opacity将新高斯添加到场景中。
+			- 根据pseudo semantic的mask内深度和opacity的高斯进行聚类，再经过几何检查和语义检查提取scene graph节点。
+	- 存储特征方式：
+		- 每个高斯：id(需要维护全局id)，xyz，rgb，o，r，feature(512)
+		- scene graph每个节点：id，gaussian id list，feature(512)，质心xyz 。
+			- 对于高置信度的节点（几何和语义高度一致的节点），可以即时更新。
+			- 对于低置信度的节点，采用延迟更新的策略，通过多帧观测来积累信息。
+			- **活跃节点**：当前滑动窗口内的节点，优先更新。
+			- **延迟节点**：滑动窗口外的节点，等待剪枝或确认。
+			- **稳定节点**：已确认的节点，不再频繁更新，除非新的观测明显与其匹配。
+			- 能不能不即时更新，构造一个树结构，之后再剪枝，就是说当发现这个节点经过多长时间之后不再有变化？但是如果这时候序列又再次经过了这个地方怎么办？
+			- 而且有一篇论文说如何能够利用上过去的信息？
+		- 已有数据：
+			- 第一帧全部高斯用来初始化，2D有多少个mask的话scene graph就有多少个节点(假设mask不重叠)，
+			- t-1时刻Gaussian Map，t时刻gt rgb，depth，pseudo semantic，t-1时刻scene graph
+			- t-1时刻的map在t时刻的pose下渲染得到render rgb，render depth，render opacity，render semantic
+			- 利用t时刻的gt和t时刻render的rgb，depth，semantic分别求loss梯度回传给高斯参数进行优化(semantic loss的设计需要注意)
+			- t时刻rgb和depth投影得到的三维点去全局gaussian map中找几何的重叠，如果几何重叠大于一定阈值的就检查语义相关性，语义相关性大于一定阈值的就把这些高斯和赋予和之前地图里的高斯一样的scene graph的id。如果匹配上现有节点，则更新节点信息，更新质心，gaussian id list，feature
+			- opt
+			  collapsed:: true
+				- 如果几何上有重叠但语义上没有相关性？希望通过多帧观测来检查一致性？还是说我合并的时候给一个权重。但是如果直接和进去就是混入了错误的特征。
+				- 如果几何上没有重叠但是语义上有相关性？这种有可能出现嘛？局部观测和遮挡。
+					- 三维也有可能出现局部观测，受有限视角影响。
+					- 利用场景上下文信息来辅助判断。例如，如果一个语义标签在场景中出现的概率很高，那么即使几何不重叠，也可以考虑其潜在的相关性。
+				- 这两种情况考虑使用多帧验证：使用滑动窗口进行不一致性检测，加权合并/投票机制，上下文验证
+			- 如果几何上没有重叠且语义上没有相关性，则初始化新的scene graph node
+			- 但是spalt的时候还是根据opacity去给没有深度的地方上高斯。
+			-
+			- key frame如何利用？
+			- 几何和语义的动态权重？环境复杂度，历史数据，不确定性估计
+			- 能不能不基于阈值的方法，能不能学习高斯场在空间上的几何分布？或许根据平面？
+			- 节点的合并和分裂？
+				- 合并：如果新帧中的某些mask与多个现有节点有较高的几何和语义重叠，可以考虑将这些节点合并为一个节点，以简化场景图。
+				- 分裂：如果一个现有节点在新帧中被多个mask分开覆盖，且这些mask之间的几何和语义差异较大，则可以考虑将该节点分裂为多个节点，分别表示不同的对象或区域。
+			-
+			- 同时，t时刻render的semantic和t时刻pseudo semantic做匹配，t-1时刻的都在scene graph中了
+	-
+	- 只要有semantic id的高斯就不需要再有帧id和mask id，可以实现feature的更新。但是feature的优化？
+	-
+	- 还是感觉如果用rendering特性的话没有丢失了深度信息，就是说这个特征匹配能准嘛？按照几何还是语义？
+	-
+	- 高斯表征：xyz，rgb，o，r，feature
+	- t-1 时刻地图的高斯按照时刻 t 下的 pose 做渲染彩色图和深度图和语义图。
+	-
+	-
+	-
+	- render的color和render的depth是否能够利用上。不对，直接用gt color和gt rgb。不对，render才能真正表示地图里有什么。
+	- 这个语义图是什么样的格式？按照语义颜色？按照语义id？
+	- semantic
+-
+- Problem setting
+- Paradigm
+- Methodology
+- Implementation
+-
+- 找论文具体的分类：codebase，baseline，轮子。
+- 需要解决的问题和解决方法需要明确定义，就目前3个解决方案，和当前的领域内的方法去比较。
+	- memory storage: 高维feature的存储问题
+		- solution: 采用字典形式，键值对查找解决
+	- accuracy: 由遮挡和局部观测和分割模型的不稳定性引起的多视不一致性，导致错误特征(noise, outlier)会作为监督信号
+		- solution: 添加滑动窗口，进行多视一致性的check
+	- accuracy: 高斯一旦绑定到scene graph上就不可逆，高斯的feature可以做全局优化但是高斯所属scene graph id不能经过后续优化改进
+		- solution: subgraph延迟更新
+	- accuracy: 动态阈值权重。几何是由于局部观测引起的重叠部分过小(相机移动距离过大时)，而语义有可能是一致的错误，而且背景会特征突变很多。
+- memory storage角度，semantic feature
+-
+- 1，采用字典键值对查找解决高维feature存储问题
+	- Motivation(memory storage): 高斯的语义特征优化需要在每个高斯上存储高维feature需要大量显存，如何解决高维feature存储问题
+	- Paradigm: storage-index-update/双层index/Store - Dual Index - Update/Feature Indexing
+	- Methodology: 高斯只存对应帧ID和maskID，使用字典形式键值对进行feature的查找和更新(参考OpenFusion)
+- 2，采用滑动窗口检查多视不一致性问题
+	- Motivation: 由遮挡和局部观测和分割模型的不稳定性引起的多视不一致性，如何检测出错误特征并仅使用正确特征做监督
+	- Paradigm: Wait-and-Check/Wait-Check-Supervise/check-and-filter
+	- Methodology: 添加滑动窗口进行多视一致性的check，不将noise, outlier作为监督信号
+- 3，
+- 4，
+-
+- 近年来，智能系统在复杂环境中导航和理解的需求迅速增长。从自动驾驶汽车到机器人助手，准确构建和维护周围世界的表示对于有效的决策和交互至关重要。传统的地图构建方法通常依赖于封闭集环境，其中所有对象和特征都是预先已知的。然而，现实世界场景本质上是动态和不可预测的，因此需要开发能够适应新出现的、未见过的对象和环境的开集地图构建系统。
+-
+- 高斯开集语义SLAM和Scene Graph结合的问题
+-
+- 在线实时构建一个开集的，可查询的层次化地图。
+	- scene graph带来的好处：层次化语义指导。解耦的物体表示，结构化地图。适合动态场景，场景编辑，局部更新。
+	- 开集能够应对之前没见到过的物体。主要是交互角度。
+-
+- 高斯能达到实时高质量渲染的效果，本身是显式离散的表征，适合局部更新和编辑，但是却能进行连续的稠密预测，可微优化。梯度直接反传到高斯身上，直接进行参数优化。能够同时优化颜色，深度，语义(通过添加一个属性)。
+-
+- 但是构建这样一个系统面临challenge：
+- 首先是memory storage上，我们希望能够有开集语义的能力，那么就需要使用高维特征，我们还希望使用高斯优化的特性对语义进行优化
+-
+- 高效存储和检索。
+- 高维feature有什么好处？
+-
+- 发issue
+- 对硬性阈值敏感

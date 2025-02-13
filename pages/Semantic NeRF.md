@@ -1,0 +1,1 @@
+- Opennerf: Open set 3d neural scene segmentation with pixel-wise features and rendered novel views. 2024 ICLR 引入了一种获取新相机姿势的机制，增强了特征提取

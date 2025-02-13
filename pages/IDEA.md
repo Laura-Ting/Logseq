@@ -20,3 +20,20 @@
 - GiftedNav中的**residual network**，是否从什么层抽出来会更好，不同的层的特征都有什么样的特性
 -
 - 直接用3D segmentation，而非2D是否能够保持语义完整性
+-
+-
+- scene graph开集关系构建，目前scene graph构建关系并没有好好利用
+-
+- 物体scene-graph细粒度分割，根据功能，利用过分割的特性，功能点，操作点。这样也可以面向未来操作。更general。比如说柜子的话把柜门分解出来，这个柜门是可以被操作的。
+-
+- RGB分割如何利用深度信息。
+-
+- 颜色和语义共享，联合优化，NeRF ours已经尝试了效果不是很明显，感觉和网络设计架构有关？
+-
+- 尝试添加transformer，目前做的东西比较hand-crafted
+-
+- Gaussian Scene graph一定要利用GS differentiable和ADC的特性。
+-
+- Gaussian Scene Graph如果用2D Gaussian的surfel来对物体表面分布进行划分node
+-
+- 平衡的永远只有3个量：memory，accuracy，efficiency

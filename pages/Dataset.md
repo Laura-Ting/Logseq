@@ -1,0 +1,1 @@
+- Scannet: Bundlefusion: Realtime globally consistent 3d reconstruction using on-the-fly surface reintegration. 2017 ToG

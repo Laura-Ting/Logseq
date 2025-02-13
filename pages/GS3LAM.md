@@ -1,0 +1,25 @@
+- contribution
+  id:: 67ac0adc-6f5d-48c0-bca0-a67eb38ee10c
+	- 1，建立一个a Semantic Gaussian Field (SG-Field)，同时优化camera poses和appearance, geometry semantics的高斯场。语义类别被表示为低维隐式特征，在通过decoder解码出类别。
+	- 2，Depth-adaptive Scale Regularization (DSR)解决不同尺度的高斯和几何表面不一致问题。不规则的高斯尺寸阻碍表面精确重建的准确性，DSR在深度相关的范围内限制高斯的scale，间接式高斯和几何表面对齐。减小模糊的物体边界。
+	- 3，Random Sampling based Keyframe Mapping (RSKM)缓解遗忘现象，比常用的Local Covisibility Keyframe Mapping (LCKM)更有效。LCKM导致高斯场优化过程中引入严重的bias，导致全局地图一致性差。LCKM存在收敛困难的问题。
+- 高斯表征
+	- G := {(μ𝑖, 𝚺𝑖, 𝑜𝑖, c𝑖, f𝑖 )|𝑖 = 1, 2, . . . , 𝑁 },
+	- f𝑖 ∈ R𝑁𝑠𝑒𝑚 Nsem是场景中的物体个数
+	- 利用 CNN 解码器 F 𝑐𝑛𝑛​​ 将低维特征恢复到 𝐾𝑠𝑒𝑚 维（ 𝐾𝑠𝑒𝑚 表示语义标签类别）。然后，对高维特征进行 softmax 分类，得到单个像素的语义标签 ˆ 𝑠𝑝𝑖𝑥，ˆ 𝑠𝑝𝑖𝑥 = 𝑠𝑜𝑓𝑡𝑚𝑎𝑥（F𝑐𝑛𝑛（ˆ f 𝑝𝑖𝑥 ），𝑁𝑠𝑒𝑚 ≪ 𝐾𝑠𝑒𝑚 语义是用球谐系数表示
+- DSR
+	- 语义特征由随机的 𝑁𝑠𝑒𝑚 维球面谐波系数表示，该像素深度未投影位置的质心为 𝑑𝑔𝑡，不透明度为 0.5，尺度初始化为 𝑑𝑔𝑡 /𝑓，其中 𝑓 表示相机焦距。
+	- 不同帧之间的深度范围变化导致与这些帧相对应的 3D 高斯尺度存在显著差异。这种差异不利于 SG-Field 优化。而且无法自适应表示场内的高频和低频信息。
+	- ![Replaced by Image Uploader](https://raw.githubusercontent.com/Laura-Ting/blog-images/master/202502131033070.png){:height 48, :width 395}
+	- 𝑠𝑏𝑖𝑔 = 𝜇𝑠 + 2𝜎𝑠 和 𝑠𝑠𝑚𝑎𝑙𝑙 = 𝜇𝑠 − 2𝜎𝑠 。将全局高斯尺度约束在合理范围内（𝜇𝑠 −2𝜎𝑠 < 𝑠 < 𝜇𝑠 +2𝜎𝑠 ），防止高斯过大或过小。此外，间接将高斯与几何表面对齐。
+- RSKM
+	- 基于共视的方法：导致稀疏共可见性区域未得到优化，而具有大量共可见性的区域收敛困难，从而导致语义图出现明显偏差。
+	- 在对当前帧𝑓𝑐𝑢𝑟进行映射的过程中，RSKM 在每次迭代中以概率𝑝(𝑓)从关键帧集合K中选择一个帧𝑓参与优化，其中|K|表示关键帧集合K的大小，𝑘𝑚表示映射的迭代次数，𝛿𝑖,𝑗是克罗内克δ函数，若𝑖 = 𝑗则为1，否则为0，优化目标区间𝑡𝑜𝑝𝑡用于在当前帧和关键帧之间平衡优化。（当前帧与选择的关键帧相同，以及当前的迭代次数满足某个条件时，会增加选择该关键帧的概率）
+	- ![Replaced by Image Uploader](https://raw.githubusercontent.com/Laura-Ting/blog-images/master/202502131042787.png){:height 61, :width 346}
+- 目标函数
+	- 采用二元交叉熵 (BCE) 损失作为语义损失，L 𝑠𝑒𝑚 = − 𝑠𝑔𝑡 · log( ˆ 𝑠𝑝𝑖𝑥 ) + (1 − 𝑠𝑔𝑡 ) · log(1 − ˆ 𝑠𝑝𝑖𝑥 ) ，
+	- ˆ 𝑠𝑝𝑖𝑥 是从语义特征解码的语义标签，𝑠𝑔𝑡 是数据集提供的输入语义标签或使用最先进的语义分割模型生成的输入语义标签。
+	- Mapping Loss: L 𝑚𝑎𝑝𝑝𝑖𝑛𝑔 = 𝜆𝑚 𝑐 L𝑚 𝑐𝑜𝑙𝑜𝑟 + 𝜆𝑚 𝑑 L𝑑𝑒𝑝𝑡ℎ + 𝜆𝑚 𝑠 L𝑠𝑒𝑚 +𝜆𝑚 𝑏𝑖𝑔 Lbig + 𝜆𝑚 𝑠𝑚𝑎𝑙𝑙 Lsmall,
+	- Tracking Loss: L 𝑡𝑟𝑎𝑐𝑘𝑖𝑛𝑔 = 𝑀𝑜𝑏𝑠(𝜆𝑡 𝑐 L𝑡 𝑐𝑜𝑙𝑜𝑟 + 𝜆𝑡 𝑑 L𝑑𝑒𝑝𝑡ℎ + 𝜆𝑡 𝑠 L𝑠𝑒𝑚),
+	- 𝑀𝑜𝑏𝑠 = I( ˆ 𝑜𝑝𝑖𝑥 > 𝜏𝑜𝑏𝑠 ) ∧ I 𝐿1 (𝑑𝑔𝑡 , ˆ 𝑑𝑝𝑖𝑥 ) < 10  ̃ 𝐿1 (𝑑𝑔𝑡 , ˆ 𝑑𝑝𝑖𝑥 ) , 𝑀𝑜𝑏𝑠 表示在视点 T𝑡 下 SG-Field G𝑡 −1 的可观测区域 ( ˆ 𝑜𝑝𝑖𝑥 > 𝜏𝑜𝑏𝑠 ) 中深度优化良好的mask
+- ![Replaced by Image Uploader](https://raw.githubusercontent.com/Laura-Ting/blog-images/master/202502131140456.png){:height 183, :width 427}

@@ -1,0 +1,4 @@
+- Motivation
+	- 之前的方法使用了
+- 使用了一个Optimizable Semantic-space Hyperplane(OSH)，OSH是对每一个query进行fine-tune过的，为了准确定位目标区域去回应自然语言prompt
+- 有效的压缩方法去利用场景先验去压缩嘈杂的高维语义特征到compact低维向量，嵌入3DGS

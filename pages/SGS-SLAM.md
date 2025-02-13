@@ -1,0 +1,24 @@
+- contribution
+  id:: 67ab5d0d-a556-4d52-b5b6-a70e3328e197
+	- 1，多通道同时优化appearance, geometry, semantic
+	- 2，一个semantic feature loss
+	- 3，基于geometric和semantic-guidance关键帧选择，防止累计错误，识别在轨迹中曾经见过的物体
+- Limitation
+	- 依赖depth和2D semantic signal，消耗大量内存
+- 高斯语义如何表示
+	- 为高斯参数分配不同的通道来表示它们的语义标签和颜色 si = [ri bi gi]T [[#blue]]==仅仅是多一个语义颜色==
+	- ![Replaced by Image Uploader](https://raw.githubusercontent.com/Laura-Ting/blog-images/master/202502131104517.png){:height 68, :width 219}
+- Tracking
+	- ![Replaced by Image Uploader](https://raw.githubusercontent.com/Laura-Ting/blog-images/master/202502131107924.png){:height 84, :width 538}
+	- 关键帧选择：
+		- 首先以恒定间隔捕获和存储关键帧。然后和当前帧有关联的帧被选择，基于几何和语义约束。
+		- 从当前帧随机采样像素，找到像素对应的高斯Gsample，之后按照关键帧的pose投影为Gproj
+		- 几何：通过几何重叠比率（η）来评估这些投影的质量，低于Tgeo的关键帧被移除. **筛选出那些在关键帧相机视图中几何上没有很好覆盖的高斯**
+		- ![Replaced by Image Uploader](https://raw.githubusercontent.com/Laura-Ting/blog-images/master/202502131123562.png){:height 51, :width 434}
+		- 语义：移除那些与当前帧的语义图（Spix）相同的关键帧，即当它们的平均交并比（mIoU）较高时。阈值为Tsem，目的是通过选择不同视角的关键帧来增强地图优化，优先选择低mIoU重叠的视图。**希望找到在语义上与当前帧不同的视角**
+		- 在经过几何和语义过滤后，剩余的候选帧将被随机抽样，以作为与当前帧相关的选定关键帧。
+		- 为每个关键帧计算一个不确定性评分U(t) = e^−τt^。t表示关键帧的时间戳，τ是衰减系数。这个不确定性评分用于加权Lmapping，时间戳较晚的关键帧由于相机轨迹的累积误差，重建的不确定性较高，在优化时需要给予更多关注。
+- Mapping
+	- ![Replaced by Image Uploader](https://raw.githubusercontent.com/Laura-Ting/blog-images/master/202502131133008.png){:height 62, :width 401}
+- ![Replaced by Image Uploader](https://raw.githubusercontent.com/Laura-Ting/blog-images/master/202502131139396.png){:height 120, :width 599}
+-

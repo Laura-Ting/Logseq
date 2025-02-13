@@ -1,0 +1,12 @@
+- NeRF方法
+	- dis
+		- 使用MLP导致在物体边界导致over-smooth -> 无法获取fine-grained detail，物体难以解耦
+		- 大场景存在catastrophic forgetting -> 新的场景会影响整体性能
+		- computationally inefficient
+		- 分层的pixel sampling，多层非线性间接梯度优化
+-
+- Gaussian
+	- ad
+		- 渲染速度快，直接梯度流给到每个高斯参数
+		- 直接投影功能简化了向高斯场添加新通道的过程，实现动态多通道特征渲染
+		- 继承了point/surfel的efficiency和scalability，同时smoothly表示集合结构通过一种连续的方式
