@@ -372,7 +372,6 @@
 				          return top_k_acc, tp_top_k_auc
 				  ```
 		- 特定阈值下的top-k准确率和一系列阈值下的top-k AUC得分
-		  collapsed:: true
 			- ```
 			          # eval top-k accuracy at specific thresholds
 			          top_k_acc_representative, _ = self.object_semantics_eval_tp_auc(

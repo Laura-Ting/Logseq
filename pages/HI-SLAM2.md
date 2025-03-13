@@ -1,0 +1,19 @@
+- 如何新加高斯？
+- monocular prior和learning-based SLAM关系，是通过SLAM得到prior吗？还是得到prior应用于learning-basedSLAM？
+- Map-centric?
+-
+- setting: Geometry-Aware, Monocular
+- Abstract
+	- 通过monocular prior，learning-based SLAM，增强几何估计能力，3DGS作为地图表征
+	- 回环：pose graph BA，全局一致性，基于关键帧更新给高斯变形
+	- grid-based scale alignment保持先验深度的尺度一致性
+- Intro
+	- dense 3D SLAM很重要，应用多。RGBD和Lidar缺点，所以monocular好。
+	- monocular难点是缺少显式场景几何估计。传统视觉SLAM的map太稀疏，dense SLAM进行per-pixel深度轨迹但是仍有大量深度噪音。深度学习通过单目深度网络，多视立体，end-to-end提升，但是仍然有artifacts由于noisy depth，有限泛化能力，大量计算要求。Neural-SLAM和GS-SLAM无法达到render和geometry的trade-off。
+	- SLAM paradigms比较：不同于map-centric SLAM(tracking和联合优化使用统一的地图表征)，我们使用混合方法，使用基于学习的SLAM生成深度作为估计同时作为初始化3D地图的几何和引导地图优化(相机和场景共同优化)，混合设计从tracking中解耦地图训练同时在联合优化期间重新耦合位姿和地图。
+	- 深度估计使用基于scale-grid的对齐策略解决单目深度先验中的尺度失真。表面深度使用高斯相交点的无偏差深度计算。为了加强弱纹理区域，在3DGS训练过程中使用单目法向先验。在关键帧更新时让3D高斯变形。
+- 系统四个模块
+	- online tracking: 利用循环光流网络从RGB中获取估计的相机位姿和生成深度图
+	- online loop closing: 位姿图BA
+	- continuous mapping:
+	- offline refinement:位姿和几何联合优化

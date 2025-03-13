@@ -783,3 +783,7 @@
 	- ../assets/image_1739420484465_0.png
 	- ../assets/image_1739420511613_0.png
 	- ../assets/image_1739420645358_0.png
+	- ../assets/image_1740631055383_0.png
+	- ../assets/image_1740631071894_0.png
+	- ../assets/image_1740631088649_0.png
+	- ../assets/image_1740654522688_0.png
