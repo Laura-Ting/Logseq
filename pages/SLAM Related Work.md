@@ -1,4 +1,5 @@
 - traditional sparse mapping using point clouds and voxels
+  collapsed:: true
 	- Monoslam: Real-time single camera slam. 2007
 	- Orb-slam: a versatile and accurate monocular slam system. 2015
 	- Dtam: Dense tracking and mapping in real-time. 2021 ICCV
@@ -20,9 +21,11 @@
 		- Real-time 3D Reconstruction at Scale Using Voxel Hashing. 2013 ToG
 	- 传统表征不能预测未知区域，同时受表征有限的分辨率限制
 - learning-based SLAM
+  collapsed:: true
 	- Codeslam—learning a compact, optimisable representation for dense visual slam. 2018 CVPR
 	- Nodeslam: Neural object descriptors for multiview shape reconstruction. 2020 3DV
 - NeRF-base SLAM
+  collapsed:: true
 	- implicit(MLP-based)
 		- imap: Implicit mapping and positioning in real-time. 2021 ICCV 第一个使用Neural Radiance进行tracking和mapping，但是单个MLP受限于大场景
 	- hybrid
@@ -38,6 +41,7 @@
 	- InstantNGP: Instant neural graphics primitives with a multiresolution hash encoding. 2022 TOG
 	- Plvs: A slam system with points, lines, volumetric mapping, and 3d incremental segmentation. arxiv 2023 使用3D先验
 - Neural Implicit Semantic SLAM
+  collapsed:: true
 	- DNS-slam: Dense neural semanticinformed slam. 用一个2D语义prior提供多视图几何约束但是没有用semantic优化3D重建。额外的MLP channel剑麻和解码语义label的同时优化相机位姿和语义场景。
 	- SNI-slam: Semantic neural implicit slam. 2023 arxiv 前两者也提供了semantic loss给几何监督但是受限于NeRF的体渲染
 	- Orbeez-slam: A real-time monocular visual slam with orb features and nerf-realized mapping 2023 ICRA
@@ -50,6 +54,7 @@
 	- NIDS-SLAM: Neural implicit dense semantic slam. 2023 arxiv 使用Obr-SLAM3做tracking，Instant-NGP做mapping但是没有共同优化语义
 	- Neural implicit dense semantic slam. 2023 arxiv
 - Real-time dense semantic SLAM
+  collapsed:: true
 	- Kimera: an open-source library for real-time metric-semantic localization and mapping. 2020 ICRA 在mesh的face上标注语义，允许对3D mesh的寓意度量重建
 	- Slam++(traditional)
 	- Codeslam(learning-based)
@@ -57,14 +62,17 @@
 	- Semantic-direct visual odometry. 2022 RAL
 	- Vso: Visual semantic odometry. 2018 ECCV
 - Voxel？
+  collapsed:: true
 	- Fusion++: Volumetric object-level slam. 2018 3DV
 - Semantic SLAM
+  collapsed:: true
 	- points/surfels
 		- Multi-resolution Surfel Maps for Efficient Dense 3D Modeling and Tracking. JVCIR
 	- Unsupervised continual semantic adaptation through neural rendering. 2023 CVPR 传统稠密语义SLAM不能预测未知区域
 	- Language-EXtended Indoor SLAM (LEXIS): A Versatile System for Real-time Visual Scene Understanding arxiv 2024 目前感觉貌似什么都没中
 -
 - 自动驾驶
+  collapsed:: true
 	- Sfgan: Unsupervised generative adversarial learning of 3d scene flow from the 3d scene self. 2022 AIS
 	- 3d scene flow estimation on pseudo-lidar: Bridging the gap on estimating point motion. 2022 IEEE TII
 	- 3dsflabelling: Boosting 3d scene flow estimation by pseudo auto-labelling. 2024 arxiv

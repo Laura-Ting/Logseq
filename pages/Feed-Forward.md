@@ -1,0 +1,17 @@
+- DUSt3R：第一个纯end-to-end稠密三维重建不用相机参数
+- 融入数据驱动的先验
+	- 用learning-based替换基于学习的方法：
+-
+- 从单目重建动态场景：
+	- 利用深度先验：
+		- [[cut3r]]
+		- Robost-CVD使用变形线条去对齐深度图
+		- CasualSAM在单一视频上微调单目深度网络
+		- [[MonST3R]]拓展了DUSt3R去给动态场景预测pointmap通过在动态数据集上微调。但是这依旧跟随dust3r的pairwise构想，需要全局对齐作为后处理
+		- MegaSAM针对随意拍摄的动态视频，实现了对相机姿态和场景结构的高精度和鲁棒估计。与我们的方法不同，MegaSaM是基于优化的(也就是说,不是前馈)，使用显式的3D状态，不进行在线预测
+- 连续构建
+	- 单目SLAM：LSD-SLAM，SVO，Droid-slam，Nicer-slam
+	- 基于学习：
+		- 3d-r2n2使用RNN，Learning a multi-view stereo machine，Neuralrecon，pixelnerf以物体为中心
+		- Transformerfusion，Learning a multi-view stereo machine，Simplerecon，Neuralrecon，Nerfusion需要位姿输入
+		- spann3R使用空间记忆机制连续构建，但是他的记忆主要作为观测过的场景的缓存，但是cut3r的压缩状态表征不仅捕捉了场景内容也允许对未观测结构推测

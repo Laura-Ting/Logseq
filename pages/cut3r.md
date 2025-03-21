@@ -1,0 +1,66 @@
+- Continuous 3D Perception Model with Persistent State
+- 允许在线的，连续的稠密三维重建，对每一帧同时估计相机参数和3D几何，支持多种3D任务
+- Abs
+	- 统一框架应用于多种3D任务。特点是一个有状态的循环模型，随着每个新的观测值不断更新其状态表示。
+	- 给定一幅图像流，该演化状态可用于在线生成每一个新输入的度量尺度点图(每像素3D点)。这些点图位于一个共同的坐标系中，并且可以累积成一个连贯的、稠密的场景重建，随着新图像的到来而更新。捕获真实世界场景的丰富先验：它不仅可以从图像观察中预测精确的点图，而且还可以通过探测虚拟的、未观察到的视图来推断场景中的未见区域。我们的方法简单但高度灵活，可以自然地接受不同长度的图像，这些图像可能是视频流或无序的照片集合，包含静态和动态内容。
+- Intro
+	- 循环更新机制：
+		- 从少量观测中重建3D场景
+		- 从连续观测中持续细化场景
+		- 从未观测的场景中推断三维属性
+	- 给定图片流，我们维持并增量更新一个持久的编码场景内容的内核状态。每有新的一帧观测，模型同时更新他的状态和并预测当前视角的3D属性，包括3D几何（世界坐标系下的点图），相机参数（内外参），可以根据raymap推测未观测视角
+	- general和flexible：训练时使用多种3D数据，可以处理静态和动态，室内和室外，真实和仿真。推理时可以视频或者无序图片，baseline或不重叠图片，动态场景
+	- 3D任务：单目和一致的视频深度估计，相机位姿外参，3D重建
+- Method
+	- State-Input Interaction Mechanism
+		- 图片It，首先通过ViT编码器变成token表示 ![Replaced by Image Uploader](https://raw.githubusercontent.com/Laura-Ting/blog-images/master/202503181052056.png){:height 32, :width 143}
+		- 在任何图片输入之前，状态token被初始化为一组可学习的token给所有场景共享
+		- 图片token有两种交互方式，这种双向交互通过两个互连的transformer解码器实现（dust3r+croco），共同操作图像和状态token
+			- state-update：用当前图片的信息更新状态
+			- state-readout：从结合了过去信息的状态中读出上下文
+			- ![Replaced by Image Uploader](https://raw.githubusercontent.com/Laura-Ting/blog-images/master/202503181122390.png){:height 36, :width 325}
+			- st-1是上一状态，st是更新后的状态，F‘t是含有状态信息的image token，z是预制给image token的可学习的位姿token，输出的zt’捕捉图像级信息比如ego motion
+			- 在解码器内部，两侧的输出在每个编码块内cross-attend对方加强信息transfer
+		- 交互后，显示3D表征可以从Ft‘和zt’中解码出，我们预测两个点图和相应的置信度 ![Replaced by Image Uploader](https://raw.githubusercontent.com/Laura-Ting/blog-images/master/202503181137086.png){:height 39, :width 254}，分别定义了输入帧自己的坐标系和世界坐标系，其中世界系是初始图像的坐标系。
+		- 我们预测两帧之间的相对变换or ego motion ^Pt
+			- ![Replaced by Image Uploader](https://raw.githubusercontent.com/Laura-Ting/blog-images/master/202503181148019.png){:height 95, :width 262}
+			- Headself和Headworld是通过DPT实现，Heatpose是通过MLP实现
+			- 从zt‘中提取出6自由度位姿，即从当前帧到世界系的变换，所有点都是度量尺度，meter为单位
+			- 对于Xself，Xworld和Pt的预测允许每个输出接受直接的监督，加速在只有部分标注的训练集上的训练
+	- Querying the State with Unseen Views
+		- 虚拟相机内参和外参用一个raymap R表示，6-通道的图像编码每个pixel对应射线的起点和方向，用一个独立的transformer Encoderr编码成token表示Fr ![Replaced by Image Uploader](https://raw.githubusercontent.com/Laura-Ting/blog-images/master/202503181210332.png){:height 33, :width 156}
+		- raymap只做readout，不错update，其他过程同上解析出Fr‘
+		- 另外引入Headcolor去解码颜色信息 ![Replaced by Image Uploader](https://raw.githubusercontent.com/Laura-Ting/blog-images/master/202503181212244.png){:height 33, :width 143}对应raymap中每条ray的颜色
+		- 使用射线图查询场景与Masked自编码器( MAE )有一个有趣的类比。在MAE中，补全发生在补丁级别，使用整个图像的全局上下文。在这里，完成是在图像级别进行的，利用状态中捕获的3D场景的全局上下文
+	- Training Objective
+		- 训练的时候给定N个图片的序列，仅对具有米级3D标注的训练数据启用raymap模式。
+		- 我们以一定的概率将每张图像随机替换为其对应的射线图，不包括第一张视图。当三维标注的尺度未知时，禁止使用raymap查询，以避免标注尺度与状态所表示的场景尺度不一致。
+		- pointmap预测： ![Replaced by Image Uploader](https://raw.githubusercontent.com/Laura-Ting/blog-images/master/202503181221274.png){:height 31, :width 150}, c对应置信度
+			- ![Replaced by Image Uploader](https://raw.githubusercontent.com/Laura-Ting/blog-images/master/202503181222221.png){:height 37, :width 146}
+			- ![Replaced by Image Uploader](https://raw.githubusercontent.com/Laura-Ting/blog-images/master/202503181222808.png){:height 37, :width 148}
+		- 3D regression loss
+			- ![Replaced by Image Uploader](https://raw.githubusercontent.com/Laura-Ting/blog-images/master/202503181223180.png){:height 67, :width 327}
+			- s^和s是对x^和x的尺度正则化，其中s^=s
+		- Pose loss：位姿^Pt参数化为四元数^qt和移动^τt
+			- ![Replaced by Image Uploader](https://raw.githubusercontent.com/Laura-Ting/blog-images/master/202503181226810.png){:height 69, :width 296}
+		- RGB loss：当输入是raymap时，除了3D 回归损失，还添加一个MSE损失去强制预测的彩色图和真实图相近
+			- ![Replaced by Image Uploader](https://raw.githubusercontent.com/Laura-Ting/blog-images/master/202503181227134.png){:height 33, :width 152}
+	- Training Strategy
+		- Training Datasets.
+		- Curriculum Training.
+			- 第一阶段主要从静态数据集中在4 - view序列上训练模型。
+			- 第二阶段融合了动态场景数据集，提高了模型对人类等移动对象的处理能力，以及带有部分标注的数据集，进一步增强了其泛化性。
+			- 这两个阶段在224 × 224的图像上进行训练，以减少计算成本，遵循DUSt3R 。
+			- 在第三阶段，我们使用更高分辨率的训练，使用不同的纵横比，并将最大边设置为512像素。
+			- 最后，我们冻结编码器，只训练解码器，并在4到64个视图的较长的序列上运行。这一阶段的重点是加强场景间推理，有效处理长语境。
+		- Implementation Detail.
+			- 对图像编码使用ViT-Large，初始化用DUST3r的权重
+			- 编码器和解码器都在16*16 pixel的patch上操作
+			- 状态含有768token，每个维度是768
+			- raymap编码器是轻量级编码器只有两个block
+			- 使用Adam-W优化器，liner warmup跟随cosine decay
+- Experiments
+- Limitation
+	- 由于没有全局比对，可能会在很长的序列上漂移。未来方向：通过显式或隐式的全局对齐
+	- 我们的结构生成是通过确定性的而不是生成式的方法进行的，因此它可能会产生模糊的结果- -特别是当外推视点距离提供的视图太远时- -这是基于回归的方法的一个共同问题。结合生成性提法可以解决这一局限
+	- 最后，训练循环网络可能是耗时的

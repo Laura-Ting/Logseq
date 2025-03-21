@@ -1,2 +1,24 @@
-- High School Attached to Northeast Normal University
-- yanzike@air.tsinghua.edu.cn
+- 小学
+	- Second Affiliated Primary School of Northeast Normal University 07,2009-07,2015
+- 初中
+	- Changchun Xinchaoyang Experimental School 08,2015-07,2018
+- 高中
+	- High School Attached to Northeast Normal University 08,2018-06,2021
+	- High School Diploma
+	- Abschluss der oberen Mittelschule nach 12 Schuljahren
+	- National Higher Education Entrance Examination
+- 大学
+	- Bachelor of Engineering in Software Engineering
+- 推荐信
+	- yanzike@air.tsinghua.edu.cn
+		- Institute for AI Industry Research, Tsinghua University
+		- Postdoctoral Researcher
+		- Building C, TusPark
+	- dongkaikun@hit.edu.cn
+		- Professor and Director of Cyberspace Department
+		- Harbin Institute of Technology
+		- graduation project instructor
+- Internship
+	- research intern
+	- As a research intern in Institute for AI Industry Research, Tsinghua University, under the guidance of Dr. Zike Yan, I focused on the intersection of Robotics, Computer Vision, and Computer Graphics, where I engaged in comprehensive literature reviews, data collection, and analysis to inform our project designs. Collaborating with peers on projects, I enhanced system components' accuracy and efficiency through advanced algorithmic development and optimization. This involved using different data representations and processing techniques, increasing reconstruction accuracy and visual quality(PSNR from 25 to 39) in the Autonomous Exploration project (submitted to RA-L 2025), and refining semantic mapping and contextual integration(increasing top-1 accuracy by 10%) in the Multi-Modal Lifelong Navigation project (preparing for submission). Currently, I am developing a system for dynamic scene graph generation, hoping to further explore innovative approaches that advance the understanding and application of robotics and vision.
+-

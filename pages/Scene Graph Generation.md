@@ -20,24 +20,27 @@
 	- Pair then relation: Pair-net for panoptic scene graph generation. 2023 arxiv
 	- Textpsg: Panoptic scene graph generation from textual descriptions. 2023 ICCV
 	- Hilo: Exploiting high low frequency relations for unbiased panoptic scene graph generation. 2023 arxiv
-	- Haystack: A panoptic scene graph dataset to evaluate rare predicate classes. 2023 ICCV
+	- DONE Haystack: A panoptic scene graph dataset to evaluate rare predicate classes. 2023 ICCV
 	- The psg challenge: towards comprehensive scene understanding. 2023 NSR
 - PVSG
-	- Panoptic video scene graph generation. 2023 CVPR
-	- Video k-net: A simple, strong, and unified baseline for video segmentation. 2022 CVPR
+	- DONE Panoptic video scene graph generation. 2023 CVPR
+	  :LOGBOOK:
+	  CLOCK: [2025-03-15 Sat 21:49:39]--[2025-03-15 Sat 21:49:40] =>  00:00:01
+	  :END:
+	- DONE Video k-net: A simple, strong, and unified baseline for video segmentation. 2022 CVPR
 -
 - 3D Scene Graph Generation
 	- real world application
-		- Characterizing structural relationships in scenes using graph kernels. 2021 SIGGRAPH
+		- DONE Characterizing structural relationships in scenes using graph kernels. 2021 SIGGRAPH
 		- Separating semantics from rendering: a scene graph based architecture for graphics applications. 2021 VC
 	- flat
 		- Learning 3d semantic scene graphs from 3d indoor reconstructions. 2020 CVPR
 		- Knowledge-inspired 3d scene graph prediction in point cloud. 2021 NIPS 使用Point-Net作为3D物体解码器基于pcd/RGBD，通过图神经网络生成3D scene graph
 	- hierachical
-		- 3-d scene graph: A sparse and semantic representation of physical environments for intelligent agents. 2019 ToC
-		- 3d scene graph: A structure for unified semantics, 3d space, and camera. 2019 ICCV
-	- Kimera: From slam to spatial perception with 3d dynamic scene graphs. 2021 IJR 强调pairwise时空状态加速任务规划
-	- Scenegraphfusion: Incremental 3d scene graph prediction from rgb-d sequences. 2021 CVPR增量式3DSG加速机器人渐进式探索环境
+		- DONE 3-d scene graph: A sparse and semantic representation of physical environments for intelligent agents. 2019 ToC
+		- DONE 3d scene graph: A structure for unified semantics, 3d space, and camera. 2019 ICCV
+	- DONE Kimera: From slam to spatial perception with 3d dynamic scene graphs. 2021 IJR 强调pairwise时空状态加速任务规划
+	- DONE Scenegraphfusion: Incremental 3d scene graph prediction from rgb-d sequences. 2021 CVPR增量式3DSG加速机器人渐进式探索环境
 	- 上述这些缺少动态时空关系，人和物体交互，人人交互
 - 综述类
 	- A survey on 3d scene graphs: Definition, generation and application. 2023 RITA

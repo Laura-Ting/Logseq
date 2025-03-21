@@ -215,6 +215,8 @@
 		- [[Semantic NeRF]]
 		- [[Semantic Gaussian]]
 	- [[Sparse View Reconstructions Related Work]]
+	- [[Feed-Forward]]
+	-
 	-
 -
 - TO BE CLASSIFIED：
